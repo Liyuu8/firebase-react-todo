@@ -1,6 +1,6 @@
-# Hosting (Firebase)
+# Hosting (GitHub Pages)
 
-[https://fir-react-todo-8ebe6.firebaseapp.com/](https://fir-react-todo-8ebe6.firebaseapp.com/)
+[https://liyuu8.github.io/firebase-react-todo/](https://liyuu8.github.io/firebase-react-todo/)
 
 # Getting Started with Create React App
 
