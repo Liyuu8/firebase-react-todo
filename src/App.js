@@ -12,12 +12,17 @@ import {
 } from 'reactstrap';
 
 function App() {
-  const [todo, setTodo] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const [todos, setTodos] = useState([]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTodos([...todos, todo]);
-    setTodo('');
+    setTodos([...todos, { title: inputValue, isCompleted: false }]);
+    setInputValue('');
+  };
+  const completeTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].isCompleted = !newTodos[index].isCompleted;
+    setTodos(newTodos);
   };
   const removeTodo = (index) => {
     const newTodos = [...todos];
@@ -33,8 +38,8 @@ function App() {
           <InputGroup>
             <Input
               type="text"
-              value={todo}
-              onChange={(e) => setTodo(e.target.value)}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
             />
             <InputGroupAddon addonType="append">
               <Button type="submit" color="primary">
@@ -50,8 +55,18 @@ function App() {
             {todos &&
               todos.map((todo, index) => (
                 <tr key={index}>
-                  <th className="text-left">{todo}</th>
+                  <th className="text-left">
+                    {todo.isCompleted ? <del>{todo.title}</del> : todo.title}
+                  </th>
                   <td className="text-right">
+                    <Button
+                      color={todo.isCompleted ? 'secondary' : 'success'}
+                      className="mr-2"
+                      onClick={() => completeTodo(index)}
+                    >
+                      完了
+                    </Button>
+
                     <Button color="danger" onClick={() => removeTodo(index)}>
                       削除
                     </Button>
